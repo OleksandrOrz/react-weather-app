@@ -1,15 +1,14 @@
 
 import 'bootstrap/dist/css/bootstrap.css';
+import Weather from './Weather';
 function App() {
   return (
     <div className="App">
-    <div className="container">
-      <form><div className="row">
-        <div className="col-6"> <input type="search"></input> </div>
-        <div className="col-6"> <input type="submit"className="btn btn-primary"></input> </div>
+      <div className="container">
+        <Weather/>
+        <p>This project was coded by <a href='https://github.com/OleksandrOrz?tab=repositories'>Svitlana Orul</a> and is <a href='https://github.com/OleksandrOrz/react-weather-app'>open-sourcedon GitHub</a></p>
       </div>
-      </form>
-    </div>
+      
     </div> 
   );
 }
