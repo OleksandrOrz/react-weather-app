@@ -2,14 +2,15 @@ import axios from "axios";
 import { useState } from "react";
 import "./Weather.css"
 import FormattedDate from "./FormattedDate"
+import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(){
    const [redy,setReady]=useState(false)
+   const [city,setCity]=useState("Kiev")
    const [weatherData, setWeatherData]=useState({})
-    function hendleResponae(response){
+    function hendleRespons(response){
         setReady(true)
-        console.log(response)
-        setWeatherData({
+           setWeatherData({
             temp: response.data.main.temp,
             city:response.data.name,
             wind: response.data.wind.speed,
@@ -19,36 +20,32 @@ export default function Weather(){
             date:new Date (response.data.dt*1000)
         })
     }
-    
+
+    function citySearch(){
+        const apiKey = "b0ce35cd54f47a37e37cfe580baaccdd";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(hendleRespons)
+    }
+    function enterCity(event){
+     event.preventDefault();
+    citySearch()
+    }
+    function cityChange(event){
+        setCity(event.target.value)
+
+    }
     if(redy){
         return(
 <div className="Weather">
     <div className="container">
-        <form><div className="row">
-            <div className="col-9"> <input type="search"className="form-control" placeholder="Enter a city" autoFocus="on"></input> </div>
-            <div className="col-3"> <input type="submit"className="btn btn-primary " value="Search"></input> </div>
+        <form onSubmit={enterCity}><div className="row">
+            <div className="col-9"> <input type="search"className="form-control" onChange={cityChange} placeholder="Enter a city" autoFocus="on"></input> </div>
+            <div className="col-3"> <input type="submit"className="btn btn-primary " value="Search" ></input> </div>
         </div></form>
-       
-   <h1>{weatherData.city}</h1>
-    <ul>
-        <li> <FormattedDate date={weatherData.date}/></li>
-        <li className="text-capitalize">{weatherData.description}</li>
-    </ul>
-        <div className="row  mt-5">
-            <div className="col-6"> <span className="currentWeatherIMGTemp" alt={weatherData.description}> <img src={weatherData.iconUrl}></img> <span className="temperature"> {Math.round(weatherData.temp)}</span> <span className="units">C° </span></span></div>
-            <div className="col-6">
-                <ul>
-                    
-                    <li>Humidity: {weatherData.humidity}%</li>
-                    <li>Wind: {Math.round(weatherData.wind)} km/h</li>
-                </ul>
-            </div>
-            </div> 
+       <WeatherInfo weatherData={weatherData}/>
+   
     </div>
 </div>)} else {
-const apiKey = "b0ce35cd54f47a37e37cfe580baaccdd";
-let city="Kiev";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-axios.get(apiUrl).then(hendleResponae)
+citySearch()
 return("Loading....")
 }}
