@@ -35,7 +35,11 @@ border: 1px solid #70757a;
 .Weather .temperature{
     font-size: 64px;
 }
-.Weather .units{
+.Weather .units {
     position: relative;
     top: -32px;
+    
+}
+.Weather .units a{
+    text-decoration:  none;
 }
