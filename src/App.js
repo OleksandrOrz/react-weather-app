@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <div className="container">
         <Weather/>
-        <p className="aboutDeveloper">This project was coded by <a href='https://github.com/OleksandrOrz?tab=repositories'>Svitlana Orul</a> and is <a href='https://github.com/OleksandrOrz/react-weather-app'>open-sourcedon GitHub</a></p>
+        <p className="aboutDeveloper">This project was coded by <a href='https://github.com/OleksandrOrz?tab=repositories'>Svitlana Orzul</a> and is <a href='https://github.com/OleksandrOrz/react-weather-app'>open-sourcedon GitHub</a></p>
       </div>
       
     </div> 
