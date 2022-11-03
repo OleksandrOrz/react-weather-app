@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./Weather.css"
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(){
    const [redy,setReady]=useState(false)
@@ -16,7 +17,8 @@ export default function Weather(){
             description:response.data.weather[0].description,
             humidity: response.data.main.humidity,
             iconUrl:`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-            date:new Date (response.data.dt*1000)
+            date:new Date (response.data.dt*1000),
+            cordinates: response.data.coord
         })
     }
 
@@ -42,7 +44,7 @@ axios.get(apiUrl).then(hendleRespons)
             <div className="col-3"> <input type="submit"className="btn btn-primary " value="Search" ></input> </div>
         </div></form>
        <WeatherInfo weatherData={weatherData}/>
-   
+   <WeatherForecast weatherData={weatherData}/>
     </div>
 </div>)} else {
 citySearch()
